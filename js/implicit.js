@@ -58,3 +58,17 @@ function isNaN(x) {
 console.log(isNaN(1));
 console.log(isNaN(NaN));
 console.log(Number.isNaN(NaN));
+
+function addPrefex(text, prefix) {
+  let pre = "デフォルト";
+  if (typeof prefix === "string") {
+    pre = prefix;
+  }
+  return pre + text
+}
+console.log(addPrefex("文字列", "カスタム"));
+
+function 関数名() {
+  return num * 2
+}
+関数名(10)
