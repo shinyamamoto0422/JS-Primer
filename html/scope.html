@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+  </head>
+
+  <body>
+    <script>
+      function fn(arg) {
+        console.log(arg);
+      }
+      fn(1);
+
+      {
+        const x = 2; 
+        console.log(x);
+      }
+      if (true) {
+        const x = "inner";
+        console.log(x);
+      }
+
+      const array = [1, 2, 3];
+      for (const element of array) {
+        console.log(element);
+      }
+
+      // スコープチェーン
+      {
+        const outer = "x";
+        {
+          console.log(outer);
+        }
+      }
+
+      {
+        const x = "outer";
+        {
+          const x = "inner";
+          console.log(x);
+        }
+        console.log(x);
+      }
+
+      const Array = 1;
+      console.log(Array);
+
+      function doHeavyTask() {
+        const x = "heavy";
+        console.log(x);
+      }
+
+      // 変数を参照できる範囲を小さくする
+      const startTime = Date.now();
+      doHeavyTask();
+      const endTime = Date.now();
+      console.log(`実行時間は${endTime - startTime}msです`);
+
+      const measureTask = (taskFn) => {
+        const startTime = Date.now();
+        taskFn();
+        const endTime = Date.now();
+        console.log(`実行時間は${endTime - startTime}です`);
+      }
+      function doTask() {
+        const x = "heavy";
+        console.log(x);
+      }
+      measureTask(doTask);
+
+      // 関数スコープとvarの巻き上げ
+      let let_x;
+      let var_x;
+      console.log(let_x);
+      console.log(var_x);
+      let_x = 1;
+      var_x = 1;
+
+
+      console.log(aaaa);
+      var aaaa = 1;
+
+      function blockFn() {
+        var bbbb;
+        console.log(bbbb);
+        {
+          var bbbb = 2;
+        }
+        console.log(bbbb);
+      }
+      blockFn();
+      
+      // 関数宣言と巻き上げ
+      hello();
+      function hello() {
+        console.log("hello");
+      }
+
+      // goodMorning(); //error発生する
+      // var goodMorning = function() {
+      //   console.log("good morning");
+      // }
+
+      (function() {
+          var foo = "foo";
+          console.log(foo);
+        })();
+      console.log(typeof foo === "undefined");
+
+      {
+        const foo = "foo";
+        console.log(foo);
+      }
+      console.log(typeof foo === "undefined");
+
+      // function createCounter() {
+      //   let count = 0;
+      //   function increment() {
+      //     count = count + 1;
+      //     return count;
+      //   }
+      //   return increment;
+      // }
+      // const myCounter = createCounter();
+      // console.log(myCounter());
+      // console.log(myCounter())
+
+      // const closure = 10;
+      // function printFn() {
+      //   console.log(closure);
+      // }
+      // function run() {
+      //   const closure = 20;
+      //   printFn();
+      // }
+      // run();
+
+      const createCounter = () => {
+        let count = 0;
+        return function increment() {
+          count++;
+          return `${count}回目`;
+        };
+      };
+      // myCounterはincrement関数を参照している→increment関数を経由してcount変数を参照している→count変数への参照は保たれている
+      const countUp = createCounter();
+      const newCountUp = createCounter();
+
+      console.log(countUp === newCountUp);
+      
+      console.log(countUp());
+
+      function greaterThan(n) {
+        return function(m) {
+          return n > m;
+        };
+      }
+
+      const greaterThan5 = greaterThan(5);
+      console.log(greaterThan5(4));
+      console.log(greaterThan5(6));
+
+      function countFn() {
+        countFn.count = countFn.count + 1;
+        return countFn.count;
+      }
+      countFn.count = 0;
+      console.log(countFn());
+      console.log(countFn());
+
+
+
+    </script>
+  </body>
+
+</html>
